@@ -42,6 +42,15 @@ const fi = (function() {
       }
       return acc
     },
+    
+    find: function(collection, query) {
+      for (let i = 0; i < collection.length; i++) {
+        const element = collection[i];
+        if (query(element)) {
+          return element
+        }
+      }
+    },
 
     functions: function() {
 
