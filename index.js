@@ -160,12 +160,9 @@ const fi = (function() {
       }
       return values
     },
+    
     functions: function(object) {
       return this.keys(object).filter(val=> typeof(object[val]) === 'function').sort()
-    },
-
-    functions: function() {
-
     },
 
 
