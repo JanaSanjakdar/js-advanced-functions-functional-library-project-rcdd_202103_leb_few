@@ -43,7 +43,7 @@ const fi = (function() {
     },
 */
 
-each: function(collection, callback) {
+/*each: function(collection, callback) {
       const newCollection = Array.isArray(collection) ? collection.slice() : Object.values(collection)
 
       for (let i = 0; i < newCollection.length; i++)
@@ -61,6 +61,29 @@ each: function(collection, callback) {
         newArray.push(callback(collection[i]))
 
       return newArray
+    },*/
+    
+    each: function(collection, callback) {
+      if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+          const element = collection[i];
+          callback(element, i, collection)
+        }
+      } else {
+        for (const key in collection) {
+          const value = collection[key];
+          callback(value, key, collection)
+        }
+      }
+      return collection
+    },
+
+    map: function(collection, callback) {
+      const resultCollection = []
+      this.each(collection, (value, keyOrIndex)=>{
+        resultCollection.push(callback(value, keyOrIndex, collection))
+      })
+      return resultCollection
     },
     reduce: function(collection, callback, acc) {
 
