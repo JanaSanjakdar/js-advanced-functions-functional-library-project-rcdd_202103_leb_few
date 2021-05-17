@@ -53,7 +53,16 @@ const fi = (function() {
     },
     
     
-    
+    filter: function(collection, query) {
+      const results = []
+      for (let i = 0; i < collection.length; i++) {
+        const element = collection[i];
+        if (query(element)) {
+          results.push(element)
+        }
+      }
+      return results
+    },
 
     functions: function() {
 
