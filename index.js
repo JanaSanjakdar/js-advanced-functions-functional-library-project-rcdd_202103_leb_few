@@ -102,6 +102,67 @@ const fi = (function() {
       }
       return (n === 0) ? array.slice(-1)[0] : result
     },
+    
+    compact: function(array) {
+      let result = this.filter(array, (element)=> !!element)
+      return result
+    },
+
+    sortBy: function(array, callback) {
+      const sortedArray = array.slice().sort((a,b)=> callback(a) - callback(b) )
+      console.log("LSDKHJFKLJSD " + sortedArray)
+      return sortedArray
+    },
+
+    flatten: function(array, oneLevel) {
+      if (!oneLevel) {
+        return array.reduce((acc, value)=>{
+          return (Array.isArray(value)) ? acc.concat(this.flatten(value)) : acc.concat(value)
+        }, [])
+      } else {
+        return array.reduce((acc, value)=>{
+          return Array.isArray(value) ? acc.concat([...value]) : acc.concat(value)
+        }, [])
+      }
+    },
+
+    uniq: function(array, isSorted, callback) {
+      let uniqItems = []
+      if (callback) {
+        const callbackResults = []
+        for (const item of array) {
+          if (this.find(callbackResults, val => val===callback(item)) === undefined) {
+            callbackResults.push(callback(item))
+            uniqItems.push(item) 
+          }
+        }
+      } else {
+        for (const item of array) {
+          if (!this.find(uniqItems, val=>val===item)) { uniqItems.push(item) }
+        }
+      }
+      console.log(uniqItems)
+      return uniqItems
+    },
+
+    keys: function(object) {
+      let keys = []
+      for (const key in object) {
+        keys.push(key)
+      }
+      return keys
+    },
+
+    values: function(object) {
+      let values = []
+      for (const key in object) {
+        values.push(object[key]) 
+      }
+      return values
+    },
+    functions: function(object) {
+      return this.keys(object).filter(val=> typeof(object[val]) === 'function').sort()
+    },
 
     functions: function() {
 
