@@ -63,6 +63,24 @@ const fi = (function() {
       }
       return results
     },
+    
+    size: function(collection) {
+      let count = 0;
+
+      if (Array.isArray(collection)) {
+        let i = 0;
+        while (collection[i] !== undefined) {
+          i++; count++;
+        }
+      } else {
+        let keys = Object.keys(collection)
+        let keyIndex = 0;
+        while (collection[keys[keyIndex]] !== undefined) {
+          keyIndex++; count++;
+        }
+      }
+      return count
+    },
 
     functions: function() {
 
