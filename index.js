@@ -27,8 +27,20 @@ const fi = (function() {
       })
       return resultCollection
     },
-    reduce: function(collection, callback, acc) {
-
+    reduce: function(collection, callback, acc=null) {
+      if (acc) {
+        for (let i = 0; i < collection.length; i++) {
+          const element = collection[i];
+          acc = callback(acc, element, collection)
+        }
+      } else {
+        acc = collection[0]
+        for (let i = 1; i < collection.length; i++) {
+          const element = collection[i];
+          acc = callback(acc, element, collection)
+        }
+      }
+      return acc
     },
 
     functions: function() {
