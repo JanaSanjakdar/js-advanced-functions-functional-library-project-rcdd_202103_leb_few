@@ -81,6 +81,27 @@ const fi = (function() {
       }
       return count
     },
+    
+      first: function(array, n=0) {
+      let result = []
+      for (let i = 0; i < n; i++) {
+        const element = array[i];
+        result.push(element)
+      }
+      return (n === 0) ? array[0] : result
+    },
+
+    last: function(array, n=0) {
+      let result = []
+      let loop = 0
+      let i = array.length - 1
+      while (loop < n) {
+        const element = array[i]
+        result.unshift(element)
+        loop++; i--;
+      }
+      return (n === 0) ? array.slice(-1)[0] : result
+    },
 
     functions: function() {
 
